@@ -16,6 +16,7 @@ jobs:
       - run:
           name: Compress src/
           command: |
+            apt-get update
             apt-get install zip
             cd src
             chmod 755 ./* -R
