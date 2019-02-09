@@ -30,10 +30,10 @@ def update_twitter_profile(is_online, location):
         This function is not responsible for masking private location or offline status.
     """
     twitter = OAuth1Session(
-        os.environ['consumer_key'],
-        os.environ['consumer_secret'],
-        os.environ['oauth_token'],
-        os.environ['oauth_token_secret']
+        os.environ['twitter_consumer_key'],
+        os.environ['twitter_consumer_secret'],
+        os.environ['twitter_oauth_token'],
+        os.environ['twitter_oauth_token_secret']
     )
     params = {
         'name': name['name_template'].format(status = name[('on' if is_online else 'off') + 'line_status']),
