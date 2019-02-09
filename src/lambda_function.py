@@ -12,7 +12,7 @@ private_location = "(private in VRC)"
 name = {
     'name_template': '柊 釘葉 / Hiiragi Kugiha{status}',
     'online_status': '✅',
-    'offline_status': '📴'
+    'offline_status': '💤'
 }
 
 def lambda_handler(event, context):
