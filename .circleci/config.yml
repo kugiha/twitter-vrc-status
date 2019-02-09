@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: python:3-slim
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - run:
@@ -29,6 +31,8 @@ jobs:
   release:
     docker:
       - image: python:3-slim
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - attach_workspace:
