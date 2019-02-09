@@ -10,15 +10,15 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install online dependencies
-          command: pip install -r ./requirements.txt -t ./src
-      - run:
-          name: Install local dependency
-          command: pip install ./vrchat-api-python -t ./src
+          name: Install dependencies
+          command: |
+            pip install -r ./requirements.txt -t ./src
+            pip install ./vrchat-api-python -t ./src
       - run:
           name: Compress src/
           command: |
             apk add zip
+            chmod 444 ./* -R
             zip -r src src
             ls
       - store_artifacts:
