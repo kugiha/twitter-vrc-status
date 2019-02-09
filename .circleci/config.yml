@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: python:3-slim
     steps:
@@ -24,10 +21,20 @@ jobs:
             apt-get install -y zip
             cd src
             chmod 755 ./* -R
-            zip -r ../src *
+            zip -r /tmp/workspace/src *
       - store_artifacts:
-          path: ./src.zip
+          path: /tmp/workspace/src.zip
           destination: src.zip
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+          - src.zip
+  release:
+    docker:
+      - image: python:3-slim
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Release
           command: |
@@ -36,4 +43,19 @@ jobs:
             export PATH="$PATH:$GOPATH/bin"
             go get github.com/tcnksm/ghr
             VERSION=$(git describe)
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./src.zip
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /tmp/workspace/src.zip
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - build
+      - hold:
+        type: approval
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+      - release:
+          requires:
+          - hold
