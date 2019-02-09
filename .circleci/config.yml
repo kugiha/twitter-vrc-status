@@ -11,13 +11,9 @@ jobs:
             pip install -r ./requirements.txt -t ./src
             pip install ./vrchat-api-python -t ./src
       - run:
-          name: Update apt-get
-          command: |
-            echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
-            apt-get update
-      - run:
           name: Compress src/
           command: |
+            apt-get update
             apt-get install -y zip
             cd src
             chmod 755 ./* -R
@@ -37,12 +33,16 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run:
-          name: Release
+          name: Install libraries
           command: |
+            echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list
             apt-get -t stretch-backports install -y git golang
             export GOPATH=$HOME/go
             export PATH="$PATH:$GOPATH/bin"
             go get github.com/tcnksm/ghr
+      - run:
+          name: Release
+          command: |
             VERSION=$(git describe)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} /tmp/workspace/src.zip
 workflows:
