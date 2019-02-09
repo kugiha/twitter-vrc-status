@@ -30,6 +30,7 @@ jobs:
     docker:
       - image: python:3-slim
     steps:
+      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - run:
