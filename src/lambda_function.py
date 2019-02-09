@@ -42,13 +42,13 @@ def update_twitter_profile(is_online, location):
     return "lambda test"
 
 def get_vrchat_status():
-    res = requests.post(
+    user_id = requests.post(
         'https://api.vrchat.cloud/api/1/auth/user?apiKey={}'.format(apiKey),
         auth=requests.auth.HTTPBasicAuth(os.environ['vrchat_username'], os.environ['vrchat_password'])
-    ).json()
+    ).json()['id']
     api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
     api.authenticate() # Can be faster if modified as this endpoint is called twice
-    info = api.getUserById(res.id)
+    info = api.getUserById(user_id)
     if info.status == VRChatAPI.Status.OFFLINE:
         return False, offline_location
     location = info.location
