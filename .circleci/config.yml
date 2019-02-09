@@ -18,9 +18,9 @@ jobs:
           name: Compress src/
           command: |
             apk add zip
-            chmod 744 ./src -R
-            zip -r src src/*
-            ls
+            cd src
+            chmod 744 ./* -R
+            zip -r ../src *
       - store_artifacts:
           path: ./src.zip
           destination: src.zip
