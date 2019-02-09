@@ -2,6 +2,7 @@ import os
 import requests
 from requests_oauthlib import OAuth1Session
 from vrchat_api import VRChatAPI
+from vrchat_api.enum import Status
 import logging
 logger = logging.getLogger()
 
@@ -51,7 +52,7 @@ def get_vrchat_status():
     api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
     api.authenticate() # Can be faster if modified as this endpoint is called twice
     info = api.getUserById(user_id)
-    if info.status == VRChatAPI.Status.OFFLINE or info.location.offline:
+    if info.status == Status.OFFLINE or info.location.offline:
         return False, offline_location
     if info.location.private:
         return True, private_location
