@@ -54,6 +54,6 @@ def get_vrchat_status():
     info = api.getUserById(user_id)
     if info.status == Status.OFFLINE or info.location.offline:
         return False, offline_location
-    if info.location.private:
+    if info.location.private or 'private' in info.location.instanceId:
         return True, private_location
     return True, api.getWorldById(info.location.worldId).name
