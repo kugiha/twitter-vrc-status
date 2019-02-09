@@ -19,6 +19,7 @@ jobs:
           path: ./src.zip
           destination: src.zip
 workflows:
+  version: 2
   build:
     jobs:
       - build
