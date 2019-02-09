@@ -17,7 +17,9 @@ jobs:
           command: pip install ./vrchat-api-python -t ./src
       - run:
           name: Compress src/
-          command: zip src src
+          command: |
+            apk add zip
+            zip src src
       - store_artifacts:
           path: ./src.zip
           destination: src.zip
