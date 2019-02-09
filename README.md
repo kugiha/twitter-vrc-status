@@ -13,7 +13,12 @@ Set these environment variables
 - twitter_oauth_token
 - twitter_oauth_token_secret
 - vrchat_username
-- vrchat_password  
+- vrchat_password
+- offline_location
+- private_location
+- name_template
+- online_status
+- offline_status  
 Other configurations like name template, status emoji are still hard-coded. These will be customizable via environment variables. I'll do it later, or it might be a good first issue.  
 
 I know the following usage is too simplified and unkind. Maybe I will be writing more detailed one, or it might be a good first issue.
