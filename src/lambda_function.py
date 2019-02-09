@@ -10,7 +10,7 @@ apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
 offline_location = 'offline'
 private_location = "(private in VRC)"
 name = {
-    'name_template': '柊 釘葉 / Hiiragi Kugiha{status}',
+    'name_template': '{status}柊 釘葉 / Hiiragi Kugiha',
     'online_status': '✅',
     'offline_status': '💤'
 }
