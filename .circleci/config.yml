@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    type: approval
     branches:
       only:
         - master
