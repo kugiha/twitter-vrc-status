@@ -1,9 +1,11 @@
 import os
+import requests
 from requests_oauthlib import OAuth1Session
+from vrchat_api import VRChatAPI
 
+apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
 offline_location = 'リアルワールド出張中'
 private_location = "(private in VRC)"
-
 name = {
     'name_template': '柊 釘葉{status}',
     'online_status': '✅',
@@ -37,4 +39,16 @@ def update_twitter_profile(is_online, location):
     return "lambda test"
 
 def get_vrchat_status():
-    pass
+    res = requests.post(
+        'https://api.vrchat.cloud/api/1/auth/user?apiKey={}'.format(apiKey),
+        auth=requests.auth.HTTPBasicAuth(os.environ['vrchat_username'], os.environ['vrchat_password'])
+    ).json
+    api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
+    api.authenticate() # Can be faster if modified as this endpoint is called twice
+    info = api.getUserById(res.id)
+    if info.status == VRChatAPI.Status.OFFLINE:
+        return False, offline_location
+    location = info.location
+    if location.private:
+        return True, private_location
+    return True, api.getWorldById(location.worldId).name

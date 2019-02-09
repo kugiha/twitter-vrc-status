@@ -6,6 +6,8 @@ Set these environment variables
 - twitter_consumer_secret
 - twitter_oauth_token
 - twitter_oauth_token_secret
+- vrchat_username
+- vrchat_password
 
 ## Links
 The following links help development of this repo.
