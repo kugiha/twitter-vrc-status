@@ -6,7 +6,7 @@ jobs:
       only:
         - master
     docker:
-      - image: 3-alpine
+      - image: python:3-alpine
     steps:
       - checkout
       - run:
