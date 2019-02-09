@@ -7,12 +7,12 @@ import logging
 logger = logging.getLogger()
 
 apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
-offline_location = '(offline)'
-private_location = "(in private world)"
+offline_location = os.environ['offline_location']
+private_location = os.environ['private_location']
 name = {
-    'name_template': '{status}柊 釘葉 / Hiiragi Kugiha',
-    'online_status': '🌟',
-    'offline_status': '💤'
+    'name_template': os.environ['name_template'],
+    'online_status': os.environ['online_status'],
+    'offline_status': os.environ['offline_status']
 }
 
 def lambda_handler(event, context):
