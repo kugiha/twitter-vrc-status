@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    type: approval
+    docker:
+      - image: 3-alpine
+    steps:
+      - checkout
+      - run:
+          name: Install online dependencies
+          command: pip -r ./requirements.txt -t ./src
+      - run:
+          name: Install local dependency
+          command: pip ./vrchat-api-python -t ./src
+      - run:
+          name: Compress src/
+          command: zip src src
+      - store_artifacts:
+          path: ./src.zip
+          destination: src.zip
+workflows:
+  build:
+    jobs:
+      - build
+    filters:
+      branches:
+        only: master
