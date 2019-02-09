@@ -40,7 +40,7 @@ jobs:
             apt-get update
             apt-get -t stretch-backports install -y git golang
             export GOPATH=$HOME/go
-            echo 'export PATH=$GOPATH/bin:$PATH' >> $BASH_ENV
+            echo 'export PATH='"$GOPATH"'/bin:$PATH' >> $BASH_ENV
             go get github.com/tcnksm/ghr
       - run:
           name: Release
