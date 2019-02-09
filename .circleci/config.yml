@@ -2,6 +2,9 @@ version: 2
 jobs:
   build:
     type: approval
+    branches:
+      only:
+        - master
     docker:
       - image: 3-alpine
     steps:
@@ -18,11 +21,3 @@ jobs:
       - store_artifacts:
           path: ./src.zip
           destination: src.zip
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
-          filters:
-            branches:
-              only: master
