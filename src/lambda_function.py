@@ -7,10 +7,10 @@ import logging
 logger = logging.getLogger()
 
 apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
-offline_location = 'リアルワールド出張中'
+offline_location = 'offline'
 private_location = "(private in VRC)"
 name = {
-    'name_template': '柊 釘葉{status}',
+    'name_template': '柊 釘葉 / Hiiragi Kugiha{status}',
     'online_status': '✅',
     'offline_status': '📴'
 }
