@@ -18,7 +18,7 @@ jobs:
           command: |
             apk add zip
             cd src
-            chmod 744 ./* -R
+            chmod 755 ./* -R
             zip -r ../src *
       - store_artifacts:
           path: ./src.zip
