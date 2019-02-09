@@ -23,7 +23,7 @@ You need to add yourself as your friend to use this tool. You cannot do that via
 (I'm not sure if it is allowed, but there seems to be no problem in becoming a friend with oneself.)
 
 ### Setup
-Upload zip file to AWS lambda with the runtime of python 3.7. Add a CloudWatch trigger of rate(2min) or something like that.
+Upload zip file to AWS lambda with the runtime of python 3.7. Add a CloudWatch trigger of rate(2 minutes) or something like that.
 
 ## Links
 The following links help the development of this repo.
