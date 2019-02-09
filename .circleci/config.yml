@@ -33,6 +33,7 @@ jobs:
           command: |
             apt-get -t stretch-backports install -y git golang
             export GOPATH=$HOME/go
+            export PATH="$PATH:$GOPATH/bin"
             go get github.com/tcnksm/ghr
             VERSION=$(git describe)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./src.zip
