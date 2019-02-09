@@ -7,8 +7,8 @@ import logging
 logger = logging.getLogger()
 
 apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
-offline_location = 'offline'
-private_location = "(private in VRC)"
+offline_location = '(offline)'
+private_location = "(in private world)"
 name = {
     'name_template': '{status}柊 釘葉 / Hiiragi Kugiha',
     'online_status': '🌟',
