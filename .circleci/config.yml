@@ -19,7 +19,7 @@ jobs:
           name: Compress src/
           command: |
             apk add zip
-            zip src
+            zip -r src src
             ls
       - store_artifacts:
           path: ./src.zip
