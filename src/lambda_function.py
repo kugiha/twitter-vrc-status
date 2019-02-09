@@ -11,7 +11,7 @@ offline_location = 'offline'
 private_location = "(private in VRC)"
 name = {
     'name_template': '{status}柊 釘葉 / Hiiragi Kugiha',
-    'online_status': '✅',
+    'online_status': '🌟',
     'offline_status': '💤'
 }
 
