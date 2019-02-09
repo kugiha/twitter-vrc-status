@@ -28,7 +28,7 @@ jobs:
           name: Release
           command: |
             apt-get install -y git golang
-            GOPATH=$HOME/go
+            export GOPATH=$HOME/go
             go get github.com/tcnksm/ghr
             VERSION=$(git describe)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./src.zip
