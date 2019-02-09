@@ -16,7 +16,7 @@ name = {
 
 def lambda_handler(event, context):
     is_online, location = get_vrchat_status()
-    logger.info('{}, {}'.format(is_online, location))
+    logger.error('{}, {}'.format(is_online, location))
     update_twitter_profile(is_online, location)
 
 def update_twitter_profile(is_online, location):
@@ -46,7 +46,7 @@ def get_vrchat_status():
         'https://api.vrchat.cloud/api/1/auth/user?apiKey={}'.format(apiKey),
         auth=requests.auth.HTTPBasicAuth(os.environ['vrchat_username'], os.environ['vrchat_password'])
     )
-    logger.info('Response from VRChat: {}'.format(str(res)))
+    logger.error('Response from VRChat: {}'.format(str(res)))
     user_id = res.json()['id']
     api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
     api.authenticate() # Can be faster if modified as this endpoint is called twice
