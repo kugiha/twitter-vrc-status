@@ -26,8 +26,7 @@ jobs:
       - run:
           name: Release
           command: |
-            apk add git
-            apk add go=1.9
+            apk add git go musl-dev
             go get github.com/tcnksm/ghr
             VERSION=$(git describe)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./src.zip
