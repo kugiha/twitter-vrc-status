@@ -2,6 +2,8 @@ import os
 import requests
 from requests_oauthlib import OAuth1Session
 from vrchat_api import VRChatAPI
+import logging
+logger = logging.getLogger()
 
 apiKey='JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
 offline_location = 'リアルワールド出張中'
@@ -14,6 +16,7 @@ name = {
 
 def lambda_handler(event, context):
     is_online, location = get_vrchat_status()
+    logger.info('{}, {}'.format(is_online, location))
     update_twitter_profile(is_online, location)
 
 def update_twitter_profile(is_online, location):
