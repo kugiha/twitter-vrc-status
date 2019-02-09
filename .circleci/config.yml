@@ -11,10 +11,10 @@ jobs:
       - checkout
       - run:
           name: Install online dependencies
-          command: pip -r ./requirements.txt -t ./src
+          command: pip install -r ./requirements.txt -t ./src
       - run:
           name: Install local dependency
-          command: pip ./vrchat-api-python -t ./src
+          command: pip install ./vrchat-api-python -t ./src
       - run:
           name: Compress src/
           command: zip src src
