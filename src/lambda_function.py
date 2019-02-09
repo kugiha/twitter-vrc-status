@@ -45,7 +45,7 @@ def get_vrchat_status():
     res = requests.post(
         'https://api.vrchat.cloud/api/1/auth/user?apiKey={}'.format(apiKey),
         auth=requests.auth.HTTPBasicAuth(os.environ['vrchat_username'], os.environ['vrchat_password'])
-    ).json
+    ).json()
     api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
     api.authenticate() # Can be faster if modified as this endpoint is called twice
     info = api.getUserById(res.id)
