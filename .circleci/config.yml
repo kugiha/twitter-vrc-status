@@ -21,6 +21,7 @@ jobs:
             apt-get install -y zip
             cd src
             chmod 755 ./* -R
+            mkdir -p /tmp/workspace
             zip -r /tmp/workspace/src *
       - store_artifacts:
           path: /tmp/workspace/src.zip
