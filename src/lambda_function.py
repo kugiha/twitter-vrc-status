@@ -51,9 +51,8 @@ def get_vrchat_status():
     api = VRChatAPI(os.environ['vrchat_username'], os.environ['vrchat_password'])
     api.authenticate() # Can be faster if modified as this endpoint is called twice
     info = api.getUserById(user_id)
-    if info.status == VRChatAPI.Status.OFFLINE:
+    if info.status == VRChatAPI.Status.OFFLINE or info.location.offline:
         return False, offline_location
-    location = info.location
-    if location.private:
+    if info.location.private:
         return True, private_location
-    return True, api.getWorldById(location.worldId).name
+    return True, api.getWorldById(info.location.worldId).name
