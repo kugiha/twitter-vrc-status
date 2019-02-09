@@ -5,7 +5,7 @@ jobs:
       only:
         - master
     docker:
-      - image: python:3-alpine
+      - image: python:3-slim
     steps:
       - checkout
       - run:
@@ -16,7 +16,6 @@ jobs:
       - run:
           name: Compress src/
           command: |
-            apk add zip
             cd src
             chmod 755 ./* -R
             zip -r ../src *
@@ -26,9 +25,7 @@ jobs:
       - run:
           name: Release
           command: |
-            apk add git go musl-dev
+            apt-get install git go
             go get github.com/tcnksm/ghr
-            PATH="$GOPATH/bin:$PATH"
-            mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
             VERSION=$(git describe)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./src.zip
