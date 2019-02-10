@@ -30,6 +30,21 @@ You need to add yourself as your friend to use this tool. You cannot do that via
 ### Setup
 Upload zip file to AWS lambda with the runtime of python 3.7. Add a CloudWatch trigger of rate(2 minutes) or something like that.
 
+## Estimated AWS costs
+per month
+* time per request: 2000 ms
+* 1 month = 30 days
+* rate = rate(2 minutes)
+* log size per request: 1.04 kB
+### lambda
+2000 ms * 0.000000208 USD/100ms * 1 req/2min * (60*24*30) min/month = 0.089856 USD/month
+### CloudWatch Event
+1 USD/1,000,000events * 1 event/2min * (60*24*30) min/month = 0.0216 USD/month
+### CloudWatch Log
+0.50 USD/GB / (1024 MB/GB * 1024 KB/MB * (1024/1000) kB/KB) * 1.04kB/req. * 1 req./2min * (60*24*30) min/month = 0.0105 USD/month
+
+**Total: 0.122 USD/month** (14.64 JPY/month (under 1 USD = 120 JPY))
+
 ## Links
 The following links help the development of this repo.
 - https://developer.twitter.com/en/docs/accounts-and-users/manage-account-settings/api-reference/post-account-update_profile
