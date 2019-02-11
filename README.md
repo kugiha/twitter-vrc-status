@@ -1,6 +1,6 @@
 # twitter-vrc-status
-Update your twitter location or name according to your VRC status
-
+Update your twitter location or name according to your VRC status  
+日本語の簡単な導入ガイドはこちら！ Japanese Easy Installation Guide -> https://github.com/kugiha/twitter-vrc-status/blob/master/usage-guide-jp.md
 ## Caution
 This tool depends on the VRChat API, which is not officially supported, so this tool might suddenly stop working.  
 Be advised that the **request rate over 1 req./min is prohibited**, and it can lead to undesirable consequences.  
