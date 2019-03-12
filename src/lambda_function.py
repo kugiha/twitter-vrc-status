@@ -5,6 +5,7 @@ from vrchat_api import VRChatAPI
 from vrchat_api.enum import Status
 import logging
 logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 apiKey = 'JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26'
 offline_location = os.environ['offline_location']
@@ -50,23 +51,33 @@ def update_twitter_profile(is_online, location):
 
 def get_vrchat_status():
     if 'user_id' not in globals():
+        logger.info("Fetching user_id")
         store_user_id_to_global()
+    else:
+        logger.info("Using cache: user_id")
     if 'api' not in globals():
+        logger.info("Authenticating")
         store_api_session_to_global()
-    info = api.getUserById(user_id)  # Can't skip this line
+    else:
+        logger.info("Using cache: api")
+    logger.info("Fetching user info")
+    info = fetch_user_info()  # Can't skip this line
     if info.status == Status.OFFLINE or info.location.offline:
         return False, offline_location
     if info.location.private or 'private' in info.location.instanceId:
         return True, private_location
     if 'previous_world_id' not in globals():
+        logger.info("Fetching world info")
         store_world_info_to_global(info.location.worldId)
     elif previous_world_id != info.location.worldId:
+        logger.info("Fetching world info")
         store_world_info_to_global(info.location.worldId)
+    else:
+        logger.info("Using cache: world_name")
     return True, world_name
 
 
 def store_user_id_to_global():
-    logger.info("Fetching user_id")
     res = requests.get(
         'https://api.vrchat.cloud/api/1/auth/user?apiKey={}'.format(apiKey),
         auth=requests.auth.HTTPBasicAuth(os.environ['vrchat_username'],
@@ -77,7 +88,6 @@ def store_user_id_to_global():
 
 
 def store_api_session_to_global():
-    logger.info("Authenticating")
     global api
     api = VRChatAPI(os.environ['vrchat_username'],
                     os.environ['vrchat_password'])
@@ -86,19 +96,18 @@ def store_api_session_to_global():
 
 
 def fetch_user_info(is_retry=False):
-    logger.info("Fetching user info")
     try:
         info = api.getUserById(user_id)
     except:
         if not is_retry:
             info = fetch_user_info(is_retry=True)
-        logger.error('Cannot retrieve data')
+            logger.warning('User info fetch failed. Retrying...')
+        logger.error('Cannot retrieve user info. Aborting!')
         raise
     return info
 
 
 def store_world_info_to_global(world_id):
-    logger.info("Fetching world info")
     global previous_world_id
     previous_world_id = world_id
     global world_name
