@@ -3,7 +3,9 @@ Update your twitter location or name according to your VRC status
 日本語の簡単な導入ガイドはこちら！ Japanese Easy Installation Guide -> https://github.com/kugiha/twitter-vrc-status/blob/master/usage-guide-jp.md
 ## Caution
 This tool depends on the VRChat API, which is not officially supported, so this tool might suddenly stop working.  
-Be advised that the **request rate over 1 req./min is prohibited**, and it can lead to undesirable consequences.  
+Be advised that the **request rate over 1 req./min is prohibited**.  
+Also, users might experience `Created too many sessions` error when trying to log in VRChat via both web and client.
+This problem has been partly solved by #3. Users are highly recommended to **use version newer than v1.2-20.**
 
 ## Usage
 ### Configurations
